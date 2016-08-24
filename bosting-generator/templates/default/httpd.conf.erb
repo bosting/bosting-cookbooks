@@ -1,0 +1,51 @@
+ServerRoot "/usr/local"
+
+Listen <%= @ip %>:<%= @port %>
+
+Include etc/apache/shorter/dso.conf
+
+User <%= @user %>
+Group <%= @group %>
+
+ServerAdmin <%= @server_admin %>
+ServerName <%= @server_name %>
+
+Include etc/apache/shorter/files_match_ht.conf
+
+ErrorLog "/var/log/httpd/httpd-error-port-<%= @port %>.log"
+LogLevel warn
+
+Include etc/apache/shorter/log_config.conf
+
+DefaultType text/plain
+
+Include etc/apache/shorter/mime_module.conf
+
+MIMEMagicFile etc/apache/magic
+
+#EnableMMAP off
+#EnableSendfile off
+
+PidFile "/var/run/httpd-port-<%= @port %>.pid"
+LockFile "/var/log/accept-port-<%= @port %>.lock"
+StartServers          <%= @start_servers %>
+MinSpareServers       <%= @min_spare_servers %>
+MaxSpareServers       <%= @max_spare_servers %>
+MaxClients            <%= @max_clients %>
+MaxRequestsPerChild 500
+
+Include etc/apache/extra/httpd-autoindex.conf
+Include etc/apache/extra/httpd-languages.conf
+Include etc/apache/extra/httpd-info.conf
+
+Include etc/apache/shorter/mod_mime_php.conf
+Include etc/apache/shorter/mod_rpaf.conf
+
+NameVirtualHost <%= @ip %>:<%= @port %>
+
+Include etc/apache/servers/<%= @user %>/*.conf
+
+Include etc/apache/extra/httpd-default.conf
+Include etc/apache/Includes/*.conf
+
+AddDefaultCharset windows-1251

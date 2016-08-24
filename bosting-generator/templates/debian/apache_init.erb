@@ -1,0 +1,74 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          apache_<%= @user %>
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: <%= @user %> apache server
+# Description:       <%= @user %> apache server
+### END INIT INFO
+
+BASE=/usr/local
+DESC="<%= @user %> httpd daemon"
+DAEMON=$BASE/bin/httpd
+CONFIGFILE=$BASE/etc/apache/servers/<%= @user %>.conf
+SCRIPTNAME=$BASE/etc/apache/rc.d/<%= @user %>
+OPTIONS="-DNOHTTPACCEPT"
+PIDFILE=/var/run/httpd-port-<%= @port %>.pid
+
+# Gracefully exit if the package has been removed.
+test -x $DAEMON || exit 0
+
+d_start() {
+  $DAEMON -f $CONFIGFILE $OPTIONS || echo -n " error starting"
+}
+
+d_stop() {
+  kill `cat $PIDFILE` || echo -n " not running"
+}
+
+d_graceful() {
+  kill -USR1 `cat $PIDFILE`
+}
+
+d_reload() {
+  kill -HUP `cat $PIDFILE`
+}
+
+case "$1" in
+  start)
+    echo -n "Starting $DESC"
+    d_start
+    echo "."
+    ;;
+  stop)
+    echo -n "Stopping $DESC"
+    d_stop
+    echo "."
+    ;;
+  graceful)
+    echo -n "Gracefully reloading $DESC configuration..."
+    d_graceful
+    echo "gracefully reloaded."
+    ;;
+  reload)
+    echo -n "Reloading $DESC configuration..."
+    d_graceful
+    echo "reloaded."
+  ;;
+  restart)
+    echo -n "Restarting $DESC"
+    d_stop
+    sleep 1
+    d_start
+    echo "."
+    ;;
+  *)
+    echo "Usage: $SCRIPTNAME {start|stop|graceful|reload|restart}" >&2
+    exit 3
+  ;;
+esac
+
+exit 0

@@ -1,0 +1,15 @@
+<IfModule rpaf_module>
+  RPAFenable on
+  RPAFsethostname on
+  RPAFproxy_ips 127.0.0.1
+</IfModule>
+
+Alias /phpmyadmin/ "<%= @www_path %>/phpMyAdmin/"
+<Directory "<%= @www_path %>/phpMyAdmin/">
+  Options None
+  AllowOverride Limit
+  Require all granted
+</Directory>
+
+Alias /phppgadmin/ "<%= @www_path %>/phpPgAdmin/"
+Alias /roundcube/ "<%= @www_path %>/roundcube/"

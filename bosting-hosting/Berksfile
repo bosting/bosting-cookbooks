@@ -1,0 +1,7 @@
+source 'https://supermarket.chef.io'
+
+cookbook 'freebsd', github: 'sekrett/freebsd'
+cookbook 'jail', github: 'sekrett/jail'
+cookbook 'bosting-cp', path: '../bosting-cp'
+
+metadata

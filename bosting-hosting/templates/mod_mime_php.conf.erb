@@ -1,0 +1,6 @@
+<IfModule mime_module>
+  <IfModule php<%= @php_version %>_module>
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php-source .phps
+  </IfModule>
+</IfModule>

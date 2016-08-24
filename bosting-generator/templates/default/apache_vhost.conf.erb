@@ -1,0 +1,40 @@
+<VirtualHost <%= @ip %>:<%= @port %>>
+	ServerName	<%= @server_name %>
+	ServerAlias <%= @server_alias %>
+	DocumentRoot "/home/<%= @user %>/<%= @server_name %>/www"
+
+	CustomLog /home/<%= @user %>/<%= @server_name %>/logs/access_log combined
+	ErrorLog /home/<%= @user %>/<%= @server_name %>/logs/error_log
+
+	<Directory />
+		Options None
+		AllowOverride None
+	</Directory>
+
+	<IfModule mod_alias.c>
+		ScriptAlias /cgi-bin/ "/home/<%= @user %>/<%= @server_name %>/cgi-bin/"
+		<Directory "/home/<%= @user %>/<%= @server_name %>/cgi-bin">
+			AllowOverride None
+			Options None
+			Order allow,deny
+			Allow from all
+		</Directory>
+	</IfModule>
+
+	<Directory /home/<%= @user %>/<%= @server_name %>>
+		Options FollowSymLinks Includes <%= @show_indexes %>
+		AllowOverride AuthConfig Limit Indexes Options FileInfo
+	</Directory>
+
+	<IfModule mod_dir.c>
+		DirectoryIndex <%= @directory_index %>
+	</IfModule>
+
+	<IfModule mod_php<%= @php_version %>.c>
+		php_admin_value open_basedir /home/<%= @user %>:/usr/local/share/pear
+		php_admin_value upload_tmp_dir /home/<%= @user %>/<%= @server_name %>/tmp
+		php_admin_value session.save_path /home/<%= @user %>/<%= @server_name %>/tmp
+		php_admin_value soap.wsdl_cache_dir /home/<%= @user %>/<%= @server_name %>/tmp
+	</IfModule>
+</VirtualHost>
+

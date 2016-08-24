@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# PROVIDE: apache_<%= @user %>
+# REQUIRE: LOGIN cleanvar
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=apache_<%= @user %>
+rcvar=apache_<%= @user %>_enable
+
+CONFIGFILE=/usr/local/etc/apache/servers/<%= @user %>.conf
+OPTIONS="-DNOHTTPACCEPT"
+pidfile=/var/run/httpd-port-<%= @port %>.pid
+required_files="/usr/local/etc/apache/servers/<%= @user %>.conf"
+
+# Gracefully exit if the package has been removed.
+test -x $DAEMON || exit 0
+
+d_start() {
+  $DAEMON -f $CONFIGFILE $OPTIONS || echo -n " error starting"
+}
+
+d_stop() {
+  kill `cat $PIDFILE` || echo -n " not running"
+}
+
+d_graceful() {
+  kill -USR1 `cat $PIDFILE`
+}
+
+d_reload() {
+  kill -HUP `cat $PIDFILE`
+}
+
+command="/usr/local/sbin/httpd"
+extra_commands="status reload"
+reload_cmd="$COMMAND reload'"
+
+load_rc_config $name
+run_rc_command "$1"

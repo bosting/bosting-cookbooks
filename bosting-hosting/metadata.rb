@@ -1,0 +1,13 @@
+name 'bosting-hosting'
+maintainer 'Alexander Zubkov'
+maintainer_email 'info@zubkov.info'
+license 'MIT'
+description 'Installs/Configures bosting-hosting'
+long_description 'Installs/Configures bosting-hosting'
+version '0.1.0'
+
+depends 'line', '0.6.3'
+depends 'freebsd', '0.7.0'
+depends 'jail', '0.2.0'
+depends 'sysctl', '0.7.5'
+depends 'bosting-cp', '0.1.0'

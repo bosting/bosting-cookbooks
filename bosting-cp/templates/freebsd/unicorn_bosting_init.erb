@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# PROVIDE: unicorn_bosting
+# REQUIRE: LOGIN cleanvar mysql
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=unicorn_bosting
+rcvar=unicorn_bosting_enable
+
+COMMAND="su -l bosting -c 'cd /home/bosting/bosting-cp && PATH=/usr/local/rbenv/shims:$PATH ./bin/unicorn"
+extra_commands="status reload"
+start_cmd="$COMMAND start'"
+stop_cmd="$COMMAND stop'"
+restart_cmd="$COMMAND restart'"
+status_cmd="$COMMAND status'"
+reload_cmd="$COMMAND reload'"
+
+load_rc_config $name
+run_rc_command "$1"
