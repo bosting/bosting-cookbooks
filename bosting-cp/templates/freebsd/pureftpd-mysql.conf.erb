@@ -1,0 +1,22 @@
+# MYSQLServer     127.0.0.1
+# MYSQLPort       3306
+MYSQLSocket     /tmp/mysql.sock
+MYSQLUser       pureftpd
+MYSQLPassword   <%= @password %>
+MYSQLDatabase   bosting-cp
+MYSQLCrypt      md5
+
+MYSQLGetPW      SELECT Password FROM pureftpd WHERE User='\L'
+MYSQLGetUID     SELECT Uid FROM pureftpd WHERE User='\L'
+#MYSQLDefaultUID 1000
+MYSQLGetGID     SELECT Gid FROM pureftpd WHERE User='\L'
+#MYSQLDefaultGID 1000
+MYSQLGetDir     SELECT Dir FROM pureftpd WHERE User='\L'
+# MySQLGetQTAFS  SELECT QuotaFiles FROM pureftpd WHERE User='\L'
+MySQLGetQTASZ  SELECT QuotaSize FROM pureftpd WHERE User='\L'
+# MySQLGetRatioUL SELECT ULRatio FROM pureftpd WHERE User='\L'
+# MySQLGetRatioDL SELECT DLRatio FROM pureftpd WHERE User='\L'
+MySQLGetBandwidthUL SELECT ULBandwidth FROM pureftpd WHERE User='\L'
+MySQLGetBandwidthDL SELECT DLBandwidth FROM pureftpd WHERE User='\L'
+# MySQLForceTildeExpansion 1
+# MySQLTransactions On

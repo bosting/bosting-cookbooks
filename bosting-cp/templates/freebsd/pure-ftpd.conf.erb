@@ -1,0 +1,41 @@
+ChrootEveryone              yes
+BrokenClientsCompatibility  yes
+MaxClientsNumber            50
+Daemonize                   yes
+MaxClientsPerIP             8
+VerboseLog                  yes
+DisplayDotFiles             yes
+AnonymousOnly               no
+NoAnonymous                 yes
+SyslogFacility              none
+DontResolve                 yes
+MaxIdleTime                 15
+
+MySQLConfigFile             /usr/local/etc/pureftpd-mysql.conf
+
+LimitRecursion              10000 8
+AnonymousCanCreateDirs      no
+MaxLoad                     4
+PassivePortRange            49000 50000
+# ForcePassiveIP              192.168.0.1
+AntiWarez                   yes
+Bind                        <%= @ip %>,21
+Umask                       117:007
+MinUID                      1000
+AllowUserFXP                no
+AllowAnonymousFXP           no
+ProhibitDotFilesWrite       no
+ProhibitDotFilesRead        no
+AutoRename                  no
+AnonymousCantUpload         yes
+
+AltLog                     clf:/var/log/pureftpd.log
+
+MaxDiskUsage               99
+CustomerProof              yes
+
+IPV4Only                   yes
+# IPV6Only                   yes
+
+# FileSystemCharset          big5
+# ClientCharset              big5
