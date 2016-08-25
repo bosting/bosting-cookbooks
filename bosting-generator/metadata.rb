@@ -1,6 +1,6 @@
 name 'bosting-generator'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Alexander Zubkov'
+maintainer_email 'info@zubkov.info'
 license 'MIT'
 description 'Installs/Configures bosting-generator'
 long_description 'Installs/Configures bosting-generator'
