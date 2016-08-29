@@ -1,11 +1,11 @@
 module BostingGenerator
   module Helper
     def read_array_from_rc_conf(name)
-      line = begin
-               ::File.readlines('/etc/rc.conf').grep(/^#{name}=/)
-             rescue Errno::ENOENT
-               []
-             end.last.to_s
+      begin
+        line = ::File.readlines('/etc/rc.conf').grep(/^#{name}=/).last.to_s
+      rescue Errno::ENOENT
+        return []
+      end
 
       match = line.match(/^#{name}="(.*?)"/)
       if match
