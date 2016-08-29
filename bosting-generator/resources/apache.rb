@@ -1,9 +1,8 @@
 resource_name :apache
 
-property :server_name, String, name_property: true
-property :server_admin, String, required: true
-property :user, String, required: true
+property :user, String, name_property: true
 property :group, String, required: true
+property :server_admin, String, required: true
 property :ip, String, required: true
 property :port, Fixnum, required: true
 property :start_servers, Fixnum, required: true
@@ -21,10 +20,9 @@ action :create do
     source 'httpd.conf.erb'
     mode 0600
     variables(
-        server_name: server_name,
-        server_admin: server_admin,
         user: new_resource.user,
         group: new_resource.group,
+        server_admin: server_admin,
         ip: ip,
         port: port,
         start_servers: start_servers,
