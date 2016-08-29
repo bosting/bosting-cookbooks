@@ -4,6 +4,8 @@
 #
 # Copyright (c) 2016 Alexander Zubkov, All Rights Reserved.
 
+include_recipe 'bosting-generator::redis'
+
 node['bosting-generator']['tasks']['system_users'].each do |obj|
   system_user obj['name'] do
     group obj['group']
