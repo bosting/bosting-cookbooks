@@ -6,39 +6,42 @@
 
 include_recipe 'bosting-generator::redis'
 
-node['bosting-generator']['tasks']['system_users'].each do |obj|
-  system_user obj['name'] do
-    group obj['group']
-    action obj['action']
-  end
-end
-
-node['bosting-generator']['tasks']['apaches'].each do |obj|
-  apache obj['name'] do
-    server_admin obj['server_admin']
-    user obj['user']
-    group obj['group']
-    ip obj['ip']
-    port obj['port']
-    apache_version obj['apache_version']
-    start_servers obj['start_servers']
-    min_spare_servers obj['min_spare_servers']
-    max_spare_servers obj['max_spare_servers']
-    max_clients obj['max_clients']
-    action obj['action']
-  end
-end
-
-node['bosting-generator']['tasks']['vhosts'].each do |obj|
-  vhost obj['name'] do
-    user obj['user']
-    group obj['group']
-    ip obj['ip']
-    port obj['port']
-    server_alias obj['server_alias']
-    directory_index obj['directory_index']
-    php_version obj['php_version']
-    show_indexes obj['show_indexes']
-    action obj['action']
+while (task = $redis.rpop('tasks'))
+  task = JSON.parse(task)
+  type = task['type']
+  case type
+  when 'system_user'
+    system_user task['name'] do
+      group task['group']
+      action task['action']
+    end
+  when 'apache'
+    apache task['name'] do
+      server_admin task['server_admin']
+      user task['user']
+      group task['group']
+      ip task['ip']
+      port task['port']
+      apache_version task['apache_version']
+      start_servers task['start_servers']
+      min_spare_servers task['min_spare_servers']
+      max_spare_servers task['max_spare_servers']
+      max_clients task['max_clients']
+      action task['action']
+    end
+  when 'vhost'
+    vhost task['name'] do
+      user task['user']
+      group task['group']
+      ip task['ip']
+      port task['port']
+      server_alias task['server_alias']
+      directory_index task['directory_index']
+      php_version task['php_version']
+      show_indexes task['show_indexes']
+      action task['action']
+    end
+  else
+    raise RuntimeError, "Unknown task type: #{type}"
   end
 end
