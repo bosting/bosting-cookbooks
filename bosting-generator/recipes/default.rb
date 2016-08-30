@@ -12,6 +12,7 @@ while (task = $redis.rpop('tasks'))
   case type
   when 'system_user'
     system_user task['name'] do
+      uid task['uid']
       group task['group']
       action task['action']
     end
