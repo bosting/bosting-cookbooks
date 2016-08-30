@@ -30,7 +30,7 @@ while (task = $redis.rpop('tasks'))
       action task['action']
     end
   when 'vhost'
-    vhost task['name'] do
+    vhost task['server_name'] do
       user task['user']
       group task['group']
       ip task['ip']
