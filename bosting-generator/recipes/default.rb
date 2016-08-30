@@ -17,9 +17,8 @@ while (task = $redis.rpop('tasks'))
       action task['action']
     end
   when 'apache'
-    apache task['name'] do
+    apache task['user'] do
       server_admin task['server_admin']
-      user task['user']
       group task['group']
       ip task['ip']
       port task['port']
