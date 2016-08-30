@@ -8,6 +8,7 @@ property :ip, String, required: true
 property :port, Fixnum, required: true
 property :directory_index, String, required: true
 property :show_indexes, [TrueClass, FalseClass], required: true
+property :apache_version, String, required: true
 property :php_version, String, required: true
 
 action :create do
@@ -37,15 +38,25 @@ action :create do
         php_version: php_version
     )
   end
+
+  apache user do
+    apache_version new_resource.apache_version
+    action :reload
+  end
 end
 
 action :destroy do
-  directory "/home/#{user}/#{server_name}" do
-    resursive true
+  file "/usr/local/etc/apache/servers/#{user}/#{server_name}.conf" do
     action :delete
   end
 
-  file "/usr/local/etc/apache/servers/#{user}/#{server_name}.conf" do
+  apache user do
+    apache_version apache_version
+    action :reload
+  end
+
+  directory "/home/#{user}/#{server_name}" do
+    resursive true
     action :delete
   end
 end

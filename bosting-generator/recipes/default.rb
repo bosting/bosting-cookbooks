@@ -37,6 +37,7 @@ while (task = $redis.rpop('tasks'))
       port task['port']
       server_alias task['server_alias']
       directory_index task['directory_index']
+      apache_version task['apache_version']
       php_version task['php_version']
       show_indexes task['show_indexes']
       action task['action']
