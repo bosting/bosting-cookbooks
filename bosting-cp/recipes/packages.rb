@@ -6,6 +6,7 @@ package 'node'
 if node['platform'] == 'freebsd'
   package 'ruby'
   package 'rubygem-gems'
+  package 'gmake'
 
   package 'openssl'
   freebsd_port 'nginx' do
