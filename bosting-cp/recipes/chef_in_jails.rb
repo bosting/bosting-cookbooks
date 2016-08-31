@@ -1,5 +1,5 @@
 %w(chef-apply chef-client chef-shell chef-solo).each do |link|
-  link "/usr/jails/basejail/bin/#{link}" do
+  link "/usr/jails/basejail/usr/bin/#{link}" do
     to "/opt/chef/bin/#{link}"
   end
 end

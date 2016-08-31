@@ -10,7 +10,7 @@ name=chef_client
 rcvar=chef_client_enable
 
 pidfile="/var/run/${name}.pid"
-command="/bin/chef-client"
+command="/usr/bin/chef-client"
 command_args="--daemonize --logfile /var/log/chef-client --pid ${pidfile}"
 procname="/opt/chef/embedded/bin/ruby"
 
