@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# PROVIDE: chef-client
+# REQUIRE: LOGIN cleanvar
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=chef_client
+rcvar=chef_client_enable
+
+pidfile="/var/run/${name}.pid"
+command="/bin/chef-client"
+command_args="--daemonize --logfile /var/log/chef-client --pid ${pidfile}"
+procname="/opt/chef/embedded/bin/ruby"
+
+load_rc_config $name
+run_rc_command "$1"

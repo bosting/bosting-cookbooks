@@ -16,6 +16,7 @@ if node['platform'] == 'freebsd'
   include_recipe 'bosting-cp::pf'
   include_recipe 'freebsd::portsnap'
   include_recipe 'bosting-cp::chef_in_jails'
+  include_recipe 'bosting-cp::chef_client'
 end
 include_recipe 'bosting-cp::users'
 include_recipe 'bosting-cp::packages'
