@@ -32,6 +32,11 @@ node['bosting-cp']['apache_variations'].each do |jail_name, options|
     action :create
   end
 
+  file "#{jail_base_path}/etc/bosting_name" do
+    content jail_name
+    mode 0600
+  end
+
   dest_path = "#{jail_base_path}/etc/resolv.conf"
   execute "cp /etc/resolv.conf #{dest_path}" do
     creates dest_path

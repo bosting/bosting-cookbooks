@@ -13,3 +13,10 @@ case node['platform']
 end
 
 execute "hostname #{fqdn}"
+
+if node['platform'] == 'freebsd'
+  file '/etc/bosting_name' do
+    content 'root'
+    mode 0600
+  end
+end

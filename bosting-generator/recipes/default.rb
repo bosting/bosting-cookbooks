@@ -4,9 +4,13 @@
 #
 # Copyright (c) 2016 Alexander Zubkov, All Rights Reserved.
 
+if node['bosting-generator']['queuename'].nil?
+  raise RuntimeError, 'File /etc/bosting_name was not created'
+end
+
 include_recipe 'bosting-generator::redis'
 
-while (task = $redis.rpop('tasks'))
+while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}"))
   task = JSON.parse(task)
   type = task['type']
   case type
