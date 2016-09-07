@@ -156,7 +156,7 @@ execute './bin/rake db:setup' do
   user user
   group group
   environment(ruby_env_vars)
-  not_if "mysql bosting -e 'SHOW TABLES'"
+  not_if "mysql bosting-cp -e 'SHOW TABLES'"
 end
 
 execute 'db_migrate' do
