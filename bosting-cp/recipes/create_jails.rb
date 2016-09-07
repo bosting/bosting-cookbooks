@@ -24,6 +24,19 @@ ssh_keygen '/root/.ssh/chef_rsa' do
   secure_directory true
 end
 
+dest_path = '/usr/local/bin/notify_chef'
+template dest_path do
+  mode 0700
+  variables(apache_variation_names: node['bosting-cp']['apache_variations'].map(&:first))
+end
+
+sudo 'notify_chef' do
+  user 'bosting'
+  runas 'root'
+  nopasswd true
+  commands  [dest_path]
+end
+
 node['bosting-cp']['apache_variations'].each do |jail_name, options|
   jail_base_path = "/usr/jails/#{jail_name}"
 

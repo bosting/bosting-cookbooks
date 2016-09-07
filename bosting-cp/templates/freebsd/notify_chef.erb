@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case "$1" in
+  root)
+    kill -USR1 `cat /var/run/chef_client.pid`
+    ;;
+<%- @apache_variation_names.each do |name| -%>
+  <%= name %>)
+    kill -USR1 `cat /usr/jails/<%= name %>/var/run/chef_client.pid`
+    ;;
+<%- end  -%>
+esac
