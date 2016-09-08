@@ -3,7 +3,7 @@ resource_name :vhost
 property :server_name, String, name_property: true
 property :user, String, required: true
 property :group, String, required: true
-property :server_alias, String, required: true
+property :server_aliases, Array, required: true
 property :ip, String, required: true
 property :port, Fixnum, required: true
 property :directory_index, String, required: true
@@ -29,7 +29,7 @@ action :create do
     mode 0600
     variables(
         server_name: server_name,
-        server_alias: server_alias,
+        server_alias: server_aliases.join(' '),
         user: new_resource.user,
         ip: ip,
         port: port,

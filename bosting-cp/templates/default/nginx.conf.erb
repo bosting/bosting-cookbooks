@@ -57,7 +57,7 @@ http {
 
   include <%= @nginx_conf_base %>/default.conf;
   include <%= @nginx_conf_base %>/ssl.conf;
-  include <%= @nginx_conf_base %>/vhosts/*;
+  include <%= @nginx_conf_base %>/vhosts/*.conf;
   include <%= @nginx_conf_base %>/vhosts.rails/*;
   include <%= @nginx_conf_base %>/vhosts.ssl/*;
   include <%= @nginx_conf_base %>/vhosts.static/*;
