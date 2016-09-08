@@ -32,10 +32,6 @@ action :create do
     )
   end
 
-  if node['platform'] == 'freebsd'
-
-  end
-
   directory "/usr/local/etc/apache/servers/#{user}" do
     mode 0700
   end
