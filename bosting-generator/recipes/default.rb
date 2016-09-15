@@ -71,6 +71,16 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
         action task['action']
       end
     end
+  when 'mysql_user'
+    mysql_user task['login'] do
+      hashed_password task['hashed_password']
+      action task['action']
+    end
+  when 'mysql_db'
+    mysql_user task['db_name'] do
+      mysql_user task['mysql_user']
+      action task['action']
+    end
   else
     raise RuntimeError, "Unknown task type: #{type}"
   end

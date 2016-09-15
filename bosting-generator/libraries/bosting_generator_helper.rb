@@ -14,5 +14,9 @@ module BostingGenerator
         []
       end
     end
+
+    def mysql_connection_info
+      { default_file: '/root/.my.cnf', default_group: 'client' }
+    end
   end
 end
