@@ -10,7 +10,7 @@ end
 action :create do
   mysql_database_user new_resource.login do
     connection mysql_connection_info
-    password mysql_hashed_password(new_resource.hashed_password)
+    password hashed_password(new_resource.hashed_password)
     host '%'
     action :create
   end
