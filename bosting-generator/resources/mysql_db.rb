@@ -16,6 +16,7 @@ action :create do
   mysql_database_user new_resource.mysql_user do
     connection mysql_connection_info
     database_name new_resource.db_name
+    host '%'
     action :grant
   end
 end
@@ -24,6 +25,7 @@ action :destroy do
   mysql_database_user new_resource.mysql_user do
     connection mysql_connection_info
     database_name new_resource.db_name
+    host '%'
     action :revoke
   end
 

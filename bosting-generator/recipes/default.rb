@@ -77,7 +77,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
       action task['action']
     end
   when 'mysql_db'
-    mysql_user task['db_name'] do
+    mysql_db task['db_name'] do
       mysql_user task['mysql_user']
       action task['action']
     end
