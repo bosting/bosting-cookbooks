@@ -56,7 +56,7 @@ action :destroy do
   end
 
   directory "/home/#{user}/#{server_name}" do
-    resursive true
+    recursive true
     action :delete
   end
 end
