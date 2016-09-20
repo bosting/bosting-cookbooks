@@ -4,6 +4,7 @@ property :name, String, name_property: true
 property :uid, Fixnum, required: true
 property :group, String, required: true
 property :shell, String, required: true
+property :hashed_password, String, required: true
 
 action :create do
   user name do
@@ -11,6 +12,7 @@ action :create do
     group new_resource.group
     shell new_resource.shell
     home "/home/#{name}"
+    password hashed_password
   end
 
   directory "/home/#{name}" do

@@ -21,6 +21,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
       uid task['uid']
       group task['group']
       shell task['shell']
+      hashed_password task['hashed_password']
       action task['action']
     end
   when 'apache'
