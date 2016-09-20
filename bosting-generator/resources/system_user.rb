@@ -1,10 +1,10 @@
 resource_name :system_user
 
 property :name, String, name_property: true
-property :uid, Fixnum, required: true
-property :group, String, required: true
-property :shell, String, required: true
-property :hashed_password, String, required: true
+property :uid, Fixnum
+property :group, String
+property :shell, String
+property :hashed_password, String
 
 action :create do
   user name do

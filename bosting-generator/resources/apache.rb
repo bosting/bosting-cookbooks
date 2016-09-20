@@ -1,15 +1,15 @@
 resource_name :apache
 
 property :user, String, name_property: true
-property :group, String, required: true
-property :server_admin, String, required: true
-property :ip, String, required: true
-property :port, Fixnum, required: true
-property :start_servers, Fixnum, required: true
-property :min_spare_servers, Fixnum, required: true
-property :max_spare_servers, Fixnum, required: true
-property :max_clients, Fixnum, required: true
-property :apache_version, String, required: true
+property :group, String
+property :server_admin, String
+property :ip, String
+property :port, Fixnum
+property :start_servers, Fixnum
+property :min_spare_servers, Fixnum
+property :max_spare_servers, Fixnum
+property :max_clients, Fixnum
+property :apache_version, String
 
 action_class do
   include BostingGenerator::Helper

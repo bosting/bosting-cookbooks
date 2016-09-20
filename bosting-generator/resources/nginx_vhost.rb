@@ -2,10 +2,10 @@ resource_name :nginx_vhost
 
 property :server_name, String, name_property: true
 property :user, String, required: true
-property :ip, String, required: true
-property :external_ip, String, required: true
-property :port, Fixnum, required: true
-property :server_aliases, Array, required: true
+property :ip, String
+property :external_ip, String
+property :port, Fixnum
+property :server_aliases, Array
 
 action :create do
   template "/usr/local/etc/nginx/vhosts/#{user}/#{server_name}.conf" do

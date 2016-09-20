@@ -1,7 +1,7 @@
 resource_name :mysql_user
 
 property :login, String, name_property: true
-property :hashed_password, String, required: true
+property :hashed_password, String
 
 action_class do
   include BostingGenerator::Helper

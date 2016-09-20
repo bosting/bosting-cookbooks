@@ -2,14 +2,14 @@ resource_name :vhost
 
 property :server_name, String, name_property: true
 property :user, String, required: true
-property :group, String, required: true
-property :server_aliases, Array, required: true
-property :ip, String, required: true
-property :port, Fixnum, required: true
-property :directory_index, String, required: true
-property :show_indexes, [TrueClass, FalseClass], required: true
-property :apache_version, String, required: true
-property :php_version, String, required: true
+property :group, String
+property :server_aliases, Array
+property :ip, String
+property :port, Fixnum
+property :directory_index, String
+property :show_indexes, [TrueClass, FalseClass]
+property :apache_version, String
+property :php_version, String
 
 action :create do
   directory "/home/#{user}/#{server_name}" do
