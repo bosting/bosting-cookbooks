@@ -112,7 +112,7 @@ end
 
 action :stop do
   service "apache#{apache_version}" do
-    stop_command "service apache#{apache_version} start #{new_resource.user}"
+    stop_command "service apache#{apache_version} stop #{new_resource.user}"
     status_command "service apache#{apache_version} status #{new_resource.user}"
     action :stop
   end
