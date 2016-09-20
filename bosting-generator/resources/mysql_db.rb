@@ -29,7 +29,7 @@ action :destroy do
     action :revoke
   end
 
-  mysql_database new_resource.login do
+  mysql_database new_resource.db_name do
     connection mysql_connection_info
     action :drop
   end
