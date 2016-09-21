@@ -42,8 +42,10 @@ Include etc/apache/extra/httpd-info.conf
 Include etc/apache/shorter/mod_mime_php.conf
 Include etc/apache/shorter/mod_rpaf.conf
 
+<%- if @apache_version == '22' -%>
 NameVirtualHost <%= @ip %>:<%= @port %>
 
+<%- end -%>
 <%= @include_directive %> etc/apache/servers/<%= @user %>/*.conf
 
 Include etc/apache/extra/httpd-default.conf
