@@ -51,7 +51,7 @@ action :destroy do
   end
 
   apache user do
-    apache_version apache_version
+    apache_version new_resource.apache_version
     action :reload
   end
 
