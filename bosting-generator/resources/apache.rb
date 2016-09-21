@@ -74,7 +74,8 @@ end
 action :disable do
   if node['platform'] == 'freebsd'
     username = new_resource.user
-    profiles = read_array_from_rc_conf("apache#{apache_version}_profiles").delete(username).uniq
+    profiles = read_array_from_rc_conf("apache#{apache_version}_profiles").uniq
+    profiles.delete(username)
 
     replace_or_add "remove #{username} from apache profiles" do
       path '/etc/rc.conf'
