@@ -26,7 +26,9 @@ MIMEMagicFile etc/apache/magic
 #EnableSendfile off
 
 PidFile "/var/run/httpd-port-<%= @port %>.pid"
+<%- if @apache_version == '22' -%>
 LockFile "/var/log/accept-port-<%= @port %>.lock"
+<%- end -%>
 StartServers          <%= @start_servers %>
 MinSpareServers       <%= @min_spare_servers %>
 MaxSpareServers       <%= @max_spare_servers %>
