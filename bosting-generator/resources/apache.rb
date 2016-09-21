@@ -28,7 +28,8 @@ action :create do
         start_servers: start_servers,
         min_spare_servers: min_spare_servers,
         max_spare_servers: max_spare_servers,
-        max_clients: max_clients
+        max_clients: max_clients,
+        include_directive: apache_version == '24' ? 'IncludeOptional' : 'Include'
     )
   end
 
