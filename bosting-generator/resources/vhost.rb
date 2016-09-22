@@ -13,6 +13,8 @@ property :php_version, String
 
 action :create do
   directory "/home/#{user}/#{server_name}" do
+    owner new_resource.user
+    group 'www'
     mode 0750
   end
 
@@ -20,7 +22,7 @@ action :create do
     directory "/home/#{user}/#{server_name}/#{dir}" do
       owner new_resource.user
       group new_resource.group
-      mode 0750
+      mode 0755
     end
   end
 

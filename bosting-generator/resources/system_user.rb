@@ -17,7 +17,6 @@ action :create do
 
   directory "/home/#{name}" do
     owner new_resource.name
-    group new_resource.group
     mode 0750
   end
 end

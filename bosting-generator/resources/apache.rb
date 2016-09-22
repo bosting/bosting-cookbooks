@@ -37,6 +37,12 @@ action :create do
   directory "/usr/local/etc/apache/servers/#{user}" do
     mode 0700
   end
+
+  directory "/home/#{user}" do
+    user new_resource.user
+    group 'www'
+    mode 0750
+  end
 end
 
 action :destroy do
