@@ -1,10 +1,10 @@
 <VirtualHost <%= @ip %>:<%= @port %>>
 	ServerName	<%= @server_name %>
 	ServerAlias <%= @server_alias %>
-	DocumentRoot "/home/<%= @user %>/<%= @server_name %>/www"
+	DocumentRoot "/usr/home/<%= @user %>/<%= @server_name %>/www"
 
-	CustomLog /home/<%= @user %>/<%= @server_name %>/logs/access_log combined
-	ErrorLog /home/<%= @user %>/<%= @server_name %>/logs/error_log
+	CustomLog /usr/home/<%= @user %>/<%= @server_name %>/logs/access_log combined
+	ErrorLog /usr/home/<%= @user %>/<%= @server_name %>/logs/error_log
 
 	<Directory />
 		Options None
@@ -12,8 +12,8 @@
 	</Directory>
 
 	<IfModule mod_alias.c>
-		ScriptAlias /cgi-bin/ "/home/<%= @user %>/<%= @server_name %>/cgi-bin/"
-		<Directory "/home/<%= @user %>/<%= @server_name %>/cgi-bin">
+		ScriptAlias /cgi-bin/ "/usr/home/<%= @user %>/<%= @server_name %>/cgi-bin/"
+		<Directory "/usr/home/<%= @user %>/<%= @server_name %>/cgi-bin">
 			AllowOverride None
 			Options None
 			Order allow,deny
@@ -21,7 +21,7 @@
 		</Directory>
 	</IfModule>
 
-	<Directory /home/<%= @user %>/<%= @server_name %>>
+	<Directory /usr/home/<%= @user %>/<%= @server_name %>>
 		Options FollowSymLinks Includes <%= @show_indexes %>
 		AllowOverride AuthConfig Limit Indexes Options FileInfo
 	</Directory>
@@ -31,10 +31,10 @@
 	</IfModule>
 
 	<IfModule mod_php<%= @php_version %>.c>
-		php_admin_value open_basedir /home/<%= @user %>:/usr/local/share/pear
-		php_admin_value upload_tmp_dir /home/<%= @user %>/<%= @server_name %>/tmp
-		php_admin_value session.save_path /home/<%= @user %>/<%= @server_name %>/tmp
-		php_admin_value soap.wsdl_cache_dir /home/<%= @user %>/<%= @server_name %>/tmp
+		php_admin_value open_basedir /home/<%= @user %>:/usr/home/<%= @user %>:/usr/local/share/pear
+		php_admin_value upload_tmp_dir /usr/home/<%= @user %>/<%= @server_name %>/tmp
+		php_admin_value session.save_path /usr/home/<%= @user %>/<%= @server_name %>/tmp
+		php_admin_value soap.wsdl_cache_dir /usr/home/<%= @user %>/<%= @server_name %>/tmp
 	</IfModule>
 </VirtualHost>
 
