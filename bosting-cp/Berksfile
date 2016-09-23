@@ -6,6 +6,5 @@ cookbook 'freebsd', github: 'sekrett/freebsd'
 cookbook 'jail', github: 'sekrett/jail'
 cookbook 'ruby_rbenv', github: 'sekrett/ruby_rbenv'
 cookbook 'ruby_build', github: 'sekrett/chef-ruby_build'
-cookbook 'database', github: 'sekrett/database'
 
 metadata
