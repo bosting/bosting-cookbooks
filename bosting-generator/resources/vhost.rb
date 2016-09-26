@@ -14,8 +14,8 @@ property :php_version, String
 action :create do
   directory "/home/#{user}/#{server_name}" do
     owner new_resource.user
-    group 'www'
-    mode 0750
+    group new_resource.group
+    mode 0755
   end
 
   %w(cgi-bin logs tmp www).each do |dir|
