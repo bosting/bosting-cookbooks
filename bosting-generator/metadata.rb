@@ -7,4 +7,4 @@ long_description 'Installs/Configures bosting-generator'
 version '0.1.0'
 
 depends 'line', '0.6.3'
-depends 'database', '5.1.2'
+depends 'database', '6.0.0'
