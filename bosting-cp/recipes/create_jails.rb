@@ -5,16 +5,7 @@ service 'sshd' do
   action :nothing
 end
 
-dest_path = '/etc/ssh/sshd_config'
-delete_lines 'remove one ListenAddress from sshd_config' do
-  path dest_path
-  pattern '^#ListenAddress 0.0.0.0'
-end
-
-replace_or_add 'configure ssh to listen on main ip address only' do
-  path dest_path
-  pattern 'ListenAddress'
-  line "ListenAddress #{node['bosting-cp']['ip']}"
+template '/etc/ssh/sshd_config' do
   notifies :restart, 'service[sshd]', :immediately
 end
 

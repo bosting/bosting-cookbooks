@@ -1,0 +1,5 @@
+Port <%= node['bosting-cp']['ssh_port_listen'] %>
+<%- node['bosting-cp']['ssh_listen_ips'].each do |ip| -%>
+ListenAddress <%= ip %>
+<%- end -%>
+PermitRootLogin <%= node['bosting-cp']['ssh_permit_root_login'] %>
