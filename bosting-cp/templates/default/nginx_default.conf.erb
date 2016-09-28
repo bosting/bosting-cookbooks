@@ -1,5 +1,5 @@
 server {
-  listen <%= node['bosting-cp']['ip'] %>;
+  listen <%= node['bosting-cp']['services_ips'].first %>;
   root /usr/local/www/empty_page;
   error_page 404 = /index.html;
 }

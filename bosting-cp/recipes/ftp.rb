@@ -41,7 +41,7 @@ if node['platform'] == 'freebsd'
   template dest_path do
     source 'pure-ftpd.conf.erb'
     variables(
-        ip: node['bosting-cp']['ip']
+        ip: node['bosting-cp']['services_ips'].first
     )
     notifies :reload, 'service[pure-ftpd]'
   end

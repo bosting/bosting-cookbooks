@@ -6,7 +6,7 @@ upstream unicorn_bosting {
 
 server {
   reset_timedout_connection on;
-  listen <%= node['bosting-cp']['ip'] %>:80;
+  listen <%= node['bosting-cp']['services_ips'].first %>:80;
   server_name <%= node['bosting-cp']['panel_domain'] %>;
 <%- if node['bosting-cp']['panel_ssl'] -%>
   return 301 https://<%= node['bosting-cp']['panel_domain'] %>$1;
@@ -14,7 +14,7 @@ server {
 
 server {
   reset_timedout_connection on;
-  listen <%= node['bosting-cp']['ip'] %>:443 ssl;
+  listen <%= node['bosting-cp']['services_ips'].first %>:443 ssl;
   server_name <%= node['bosting-cp']['panel_domain'] %>;
 
   ssl_certificate <%= @nginx_conf_base %>/ssl/<%= @panel_domain %>/<%= @panel_domain %>.crt;

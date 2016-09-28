@@ -26,8 +26,9 @@ end
 end
 <%- end -%>
 
+# TODO: add all service_ips
 [
-    ['<%= node['bosting-cp']['ip'] %>', '<%= node['bosting-cp']['fqdn'] %>', true],
+    ['<%= node['bosting-cp']['services_ips'].first %>', '<%= node['bosting-cp']['fqdn'] %>', true],
     ['<%= node['bosting-cp']['ns1_ip'] %>', '<%= node['bosting-cp']['ns1_domain'] %>', false],
     ['<%= node['bosting-cp']['ns2_ip'] %>', '<%= node['bosting-cp']['ns2_domain'] %>', false]
 ].each do |ip_address, name, is_default|
