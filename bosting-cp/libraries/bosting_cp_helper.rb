@@ -2,7 +2,7 @@ module BostingCp
   module Helper
     def add_nullfs_to_jail(path, jail_name)
       jail_base_path = "/usr/jails/#{jail_name}"
-      mountpoint ||= "#{jail_base_path}#{path}"
+      mountpoint = "#{jail_base_path}#{path}"
 
       directory(mountpoint) { recursive true }
 
