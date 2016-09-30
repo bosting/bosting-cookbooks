@@ -25,6 +25,14 @@ sudo 'notify_chef' do
   commands  [dest_path]
 end
 
+directory '/var/run/shared' do
+  mode 01777
+end
+
+link '/tmp/mysql.sock' do
+  to '/var/run/shared/mysql.sock'
+end
+
 node['bosting-cp']['apache_variations'].each do |jail_name, options|
   jail_base_path = "/usr/jails/#{jail_name}"
 
@@ -77,6 +85,11 @@ node['bosting-cp']['apache_variations'].each do |jail_name, options|
     path "#{jail_base_path}/etc/ssh/sshd_config"
     pattern 'PermitRootLogin'
     line 'PermitRootLogin without-password'
+  end
+
+  add_nullfs_to_jail('/var/run/shared', jail_name)
+  link "#{jail_base_path}/tmp/mysql.sock" do
+    to '/var/run/shared/mysql.sock'
   end
 
   jail(jail_name) do

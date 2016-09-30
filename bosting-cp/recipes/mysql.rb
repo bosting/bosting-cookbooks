@@ -1,6 +1,12 @@
 if node['platform'] == 'freebsd'
   package "mysql#{node['bosting-cp']['mysql_version'].sub('.', '')}-server"
 
+  append_if_no_line "set MySQL socket path" do
+    path '/etc/rc.conf'
+    line 'mysql_args="--socket=/var/run/shared/mysql.sock"'
+    notifies :restart, 'service[mysql]'
+  end
+
   service 'mysql' do
     service_name 'mysql-server'
     supports status: true, restart: true, reload: false
