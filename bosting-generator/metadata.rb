@@ -8,3 +8,4 @@ version '0.1.0'
 
 depends 'line', '0.6.3'
 depends 'database', '6.0.0'
+depends 'bosting-cp', '0.1.0'

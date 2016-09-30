@@ -1,13 +1,10 @@
 include_recipe 'jail'
 
-service 'sshd' do
-  supports restart: true, reload: true, status: true
-  action :nothing
+directory '/etc/ssh/users' do
+  mode 0700
 end
-
-template '/etc/ssh/sshd_config' do
-  notifies :restart, 'service[sshd]', :immediately
-end
+template '/etc/ssh/users/sshd_config'
+include_recipe 'bosting-cp::sshd_config'
 
 ssh_keygen '/root/.ssh/chef_rsa' do
   owner 'root'
