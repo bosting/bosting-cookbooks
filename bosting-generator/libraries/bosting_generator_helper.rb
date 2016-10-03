@@ -18,5 +18,10 @@ module BostingGenerator
     def mysql_connection_info
       { default_file: '/root/.my.cnf', default_group: 'client' }
     end
+
+    def pgsql_connection_info
+      username, password = ::File.read('/root/.pgpass').strip.split(':')[3,4]
+      { username: username, password: password }
+    end
   end
 end

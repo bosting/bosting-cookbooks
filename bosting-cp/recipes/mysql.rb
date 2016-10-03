@@ -41,3 +41,7 @@ template '/root/.my.cnf' do
       password: node['bosting-cp']['mysql_root_password']
   )
 end
+
+chef_gem 'mysql2' do
+  compile_time false
+end

@@ -9,11 +9,6 @@ ruby_env_vars = {
     'HOME' => home # Needed to find .my.cnf in home directory
 }
 
-
-chef_gem 'mysql2' do
-  compile_time false
-end
-
 template '/usr/local/etc/rc.d/unicorn_bosting' do
   source 'unicorn_bosting_init.erb'
   mode 0750
