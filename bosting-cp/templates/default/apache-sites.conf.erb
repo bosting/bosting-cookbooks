@@ -12,4 +12,10 @@ Alias /phpmyadmin/ "<%= @www_path %>/phpMyAdmin/"
 </Directory>
 
 Alias /phppgadmin/ "<%= @www_path %>/phpPgAdmin/"
+<Directory "<%= @www_path %>/phpPgAdmin/">
+  Options None
+  AllowOverride Limit
+  Require all granted
+</Directory>
+
 Alias /roundcube/ "<%= @www_path %>/roundcube/"
