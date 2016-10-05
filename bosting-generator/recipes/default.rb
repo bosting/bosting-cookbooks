@@ -93,6 +93,12 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
       pgsql_user task['pgsql_user']
       action task['action']
     end
+  when 'crontab_migration'
+    crontab_migration task['user'] do
+      source_jail task['source_jail']
+      destination_jail task['destination_jail']
+      action task['action']
+    end
   else
     raise RuntimeError, "Unknown task type: #{type}"
   end
