@@ -33,6 +33,8 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
     else
       if task['action'] == 'create'
         task['action'] = ['create', 'enable', 'start', 'reload']
+      elsif task['action'] == 'stop'
+        task['action'] = ['create', 'stop', 'disable']
       elsif task['action'] == 'destroy'
         task['action'] = ['stop', 'disable', 'destroy']
       end
