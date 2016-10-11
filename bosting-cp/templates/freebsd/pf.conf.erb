@@ -26,7 +26,7 @@ pass out
 antispoof quick for { lo0 lo1 $ext_if $int_if }
 
 pass in proto tcp to $ssh_listen_ips port $ssh_listen_port
-pass in proto tcp from $services_ips to $ext_if port $tcp_services
-pass in proto udp from $services_ips to $ext_if port $udp_services
+pass in proto tcp to $services_ips port $tcp_services
+pass in proto udp to $services_ips port $udp_services
 
 pass in on $ext_if inet proto icmp all icmp-type $icmp_types
