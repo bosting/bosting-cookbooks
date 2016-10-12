@@ -5,6 +5,7 @@ end
 
 template '/etc/pf.conf' do
   source 'pf.conf.erb'
+  variables(int_if_present: !node['bosting-cp']['int_if'].empty?)
   notifies :reload, 'service[pf]'
 end
 
