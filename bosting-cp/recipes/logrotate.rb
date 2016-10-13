@@ -6,7 +6,8 @@ if node['platform'] == 'freebsd'
   end
 
   cron 'logrotate' do
-    minute '0'
+    minute '25'
+    hour '6'
     command '/usr/local/sbin/logrotate /usr/local/etc/logrotate.conf'
     action :create
   end
