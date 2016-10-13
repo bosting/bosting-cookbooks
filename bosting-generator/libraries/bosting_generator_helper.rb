@@ -23,5 +23,9 @@ module BostingGenerator
       username, password = ::File.read('/root/.pgpass').strip.split(':')[3,4]
       { username: username, password: password }
     end
+
+    def logrotate_base_path
+      node['platform'] == 'freebsd' ? '/usr/local/etc' : '/etc'
+    end
   end
 end

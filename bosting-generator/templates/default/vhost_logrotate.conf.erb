@@ -1,0 +1,29 @@
+/home/<%= @user %>/<%= @server_name %>/logs/access_log {
+  daily
+  rotate 14
+  missingok
+  size 1M
+  compress
+  delaycompress
+  dateext
+  create 644 root <%= @root_group %>
+  sharedscripts
+  postrotate
+    kill -USR1 `cat /usr/jails/<%= @apache_variation %>/var/run/httpd.<%= @user %>.pid`
+  endscript
+}
+
+/home/<%= @user %>/<%= @server_name %>/logs/error_log {
+  rotate 1
+  daily
+  missingok
+  size 1M
+  compress
+  delaycompress
+  dateext
+  create 644 root <%= @root_group %>
+  sharedscripts
+  postrotate
+    kill -USR1 `cat /usr/jails/<%= @apache_variation %>/var/run/httpd.<%= @user %>.pid`
+  endscript
+}
