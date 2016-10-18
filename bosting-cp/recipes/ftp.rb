@@ -19,6 +19,7 @@ end
 pureftpd_password = generate_random_password(16)
 
 mysql_database_user 'pureftpd' do
+  sensitive true
   connection node['bosting-cp']['mysql_connection_info']
   database_name 'bosting-cp'
   table 'pureftpd'
@@ -30,6 +31,7 @@ end
 
 if node['platform'] == 'freebsd'
   template '/usr/local/etc/pureftpd-mysql.conf' do
+    sensitive true
     source 'pureftpd-mysql.conf.erb'
     variables(
         password: pureftpd_password

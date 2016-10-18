@@ -93,6 +93,7 @@ dest_path = "#{site_home}/config/database.yml"
 mysql_password = generate_random_password(16)
 
 template "#{home}/.my.cnf" do
+  sensitive true
   source 'my.cnf.erb'
   mode 0600
   owner user
@@ -105,6 +106,7 @@ template "#{home}/.my.cnf" do
 end
 
 mysql_database_user 'bosting-cp' do
+  sensitive true
   connection node['bosting-cp']['mysql_connection_info']
   database_name 'bosting-cp'
   privileges [:all]
@@ -139,6 +141,7 @@ template "#{site_home}/config/email.yml" do
 end
 
 template "#{site_home}/db/seeds.rb" do
+  sensitive true
   source 'seeds.rb.erb'
   mode 0600
   owner user
@@ -164,6 +167,7 @@ execute 'db_migrate' do
 end
 
 execute 'db_seed' do
+  sensitive true
   command './bin/rake db:seed'
   cwd site_home
   user user

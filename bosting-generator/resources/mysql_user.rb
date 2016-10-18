@@ -9,6 +9,7 @@ end
 
 action :create do
   mysql_database_user new_resource.login do
+    sensitive true
     connection mysql_connection_info
     password hashed_password(new_resource.hashed_password)
     host '%'

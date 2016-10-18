@@ -18,6 +18,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
   case type
   when 'system_user'
     system_user task['name'] do
+      sensitive true
       uid task['uid']
       group task['group']
       shell task['shell']
@@ -78,6 +79,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
     end
   when 'mysql_user'
     mysql_user task['login'] do
+      sensitive true
       hashed_password task['hashed_password']
       action task['action']
     end
@@ -88,6 +90,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
     end
   when 'pgsql_user'
     pgsql_user task['login'] do
+      sensitive true
       hashed_password task['hashed_password']
       action task['action']
     end

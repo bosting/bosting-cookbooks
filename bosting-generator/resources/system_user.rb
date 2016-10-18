@@ -9,6 +9,7 @@ property :hashed_password, String
 
 action :create do
   user name do
+    sensitive true
     uid new_resource.uid
     group new_resource.group
     shell new_resource.shell

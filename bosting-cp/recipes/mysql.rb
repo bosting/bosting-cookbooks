@@ -34,6 +34,7 @@ execute 'set mysql root password' do
 end
 
 template '/root/.my.cnf' do
+  sensitive true
   source 'my.cnf.erb'
   mode 0600
   variables(

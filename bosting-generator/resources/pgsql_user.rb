@@ -9,6 +9,7 @@ end
 
 action :create do
   postgresql_database_user new_resource.login do
+    sensitive true
     connection pgsql_connection_info
     password hashed_password(new_resource.hashed_password)
     action :create
