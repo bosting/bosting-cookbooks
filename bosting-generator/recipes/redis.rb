@@ -5,4 +5,4 @@
   require name
 end
 
-$redis = Redis.new(driver: :hiredis)
+$redis = Redis.new(driver: :hiredis, password: ::File.read('/root/redis_password').strip)
