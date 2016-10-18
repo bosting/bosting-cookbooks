@@ -14,7 +14,7 @@ module BostingCp
     end
 
     # todo: remove duplication, already defined in app/modules/concerns/password_generator.rb
-    def generate_random_password(length = 8)
+    def generate_random_password(length = 16)
       chars = [('a'..'z'), ('A'..'Z'), (0..9)].map(&:to_a).flatten
       (0...length).map{ chars[SecureRandom.random_number(chars.length)] }.join
     end
