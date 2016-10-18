@@ -16,7 +16,7 @@ service 'pure-ftpd' do
   action :nothing
 end
 
-pureftpd_password = generate_random_password(16)
+pureftpd_password = generate_random_password
 
 mysql_database_user 'pureftpd' do
   sensitive true

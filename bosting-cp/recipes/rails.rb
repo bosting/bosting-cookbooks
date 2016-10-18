@@ -90,7 +90,7 @@ template "#{site_home}/config/settings.yml" do
 end
 
 dest_path = "#{site_home}/config/database.yml"
-mysql_password = generate_random_password(16)
+mysql_password = generate_random_password
 
 template "#{home}/.my.cnf" do
   sensitive true
