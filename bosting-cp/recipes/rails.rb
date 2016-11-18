@@ -3,6 +3,18 @@ site_home = node['bosting-cp']['rails']['site_home']
 user = node['bosting-cp']['rails']['user']
 group = node['bosting-cp']['rails']['group']
 
+user 'bosting' do
+  group 'webuser'
+  home home
+  shell '/usr/local/bin/zsh'
+end
+
+directory home do
+  owner user
+  group group
+  mode 0750
+end
+
 directory "#{home}/.rails-vars" do
   owner user
   group group
@@ -32,18 +44,6 @@ end
 service 'unicorn_bosting' do
   supports(restart: true, reload: true, status: true)
   action :enable
-end
-
-user 'bosting' do
-  group 'webuser'
-  home home
-  shell '/usr/local/bin/zsh'
-end
-
-directory home do
-  owner user
-  group group
-  mode 0750
 end
 
 directory "#{home}/.ssh" do
