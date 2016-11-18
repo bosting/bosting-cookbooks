@@ -13,3 +13,13 @@ default['bosting-cp']['nginx_conf_base'] = case node['platform']
                                              when 'debian'
                                                '/etc/nginx'
                                            end
+
+default['bosting-cp']['rails']['home'] = '/home/bosting'
+default['bosting-cp']['rails']['site_home'] = default['bosting-cp']['rails']['home'] + '/bosting-cp'
+default['bosting-cp']['rails']['user'] = 'bosting'
+default['bosting-cp']['rails']['group'] = 'www'
+default['bosting-cp']['rails']['ruby_env_vars'] = {
+   'RAILS_ENV' => 'production',
+   'PATH' => "/usr/local/rbenv/shims:#{ENV['PATH']}",
+   'HOME' => default['bosting-cp']['rails']['home']
+}

@@ -1,13 +1,7 @@
-home = '/home/bosting'
-site_home = home + '/bosting-cp'
-user = 'bosting'
-group = 'www'
-nginx_conf_base = node['bosting-cp']['nginx_conf_base']
-ruby_env_vars = {
-    'RAILS_ENV' => 'production',
-    'PATH' => "/usr/local/rbenv/shims:#{ENV['PATH']}",
-    'HOME' => home # Needed to find .my.cnf in home directory
-}
+home = node['bosting-cp']['rails']['home']
+site_home = node['bosting-cp']['rails']['site_home']
+user = node['bosting-cp']['rails']['user']
+group = node['bosting-cp']['rails']['group']
 
 directory "#{home}/.rails-vars" do
   owner user
@@ -67,8 +61,8 @@ git 'bosting-cp' do
   destination site_home
   user user
   group group
-  notifies :run, 'execute[db_migrate]'
-  notifies :run, 'execute[assets_precompile]'
+  notifies :run, 'rails_command[db_migrate]'
+  notifies :run, 'rails_command[assets_precompile]'
   notifies :reload, 'service[unicorn_bosting]'
 end
 
@@ -81,19 +75,12 @@ execute 'compile dynamic bash extension to speed up rbenv' do
   creates '/usr/local/rbenv/libexec/rbenv-realpath.dylib'
 end
 
-execute 'set bundler jobs' do
+rails_command 'set bundler jobs' do
   command "bundle config --global jobs #{node['bosting-cp']['cores'].to_s}"
-  cwd home
-  environment('HOME' => home)
-  user user
-  group group
 end
 
-execute 'bundle install --without development test --deployment' do
-  cwd site_home
-  user user
-  group group
-  environment(ruby_env_vars)
+rails_command 'bundle install' do
+  command 'bundle install --without development test --deployment'
   not_if 'bundle check', cwd: site_home
 end
 
@@ -167,42 +154,27 @@ template "#{site_home}/db/seeds.rb" do
   mode 0600
   owner user
   group group
-  notifies :run, 'execute[db_seed]'
+  notifies :run, 'rails_command[db_seed]'
 end
 
-execute './bin/rake db:setup' do
-  cwd site_home
-  user user
-  group group
-  environment(ruby_env_vars)
+rails_command 'db_setup' do
+  command './bin/rake db:setup'
   not_if "mysql bosting-cp -e 'SHOW TABLES'"
 end
 
-execute 'db_migrate' do
+rails_command 'db_migrate' do
   command './bin/rake db:migrate'
-  cwd site_home
-  user user
-  group group
-  environment(ruby_env_vars)
   action :nothing
 end
 
-execute 'db_seed' do
+rails_command 'db_seed' do
   sensitive true
   command './bin/rake db:seed'
-  cwd site_home
-  user user
-  group group
-  environment(ruby_env_vars)
   action :nothing
 end
 
-execute 'assets_precompile' do
+rails_command 'assets_precompile' do
   command './bin/rake assets:precompile'
-  cwd site_home
-  user user
-  group group
-  environment(ruby_env_vars)
   action :nothing
 end
 
@@ -213,7 +185,7 @@ end
 template '/usr/local/etc/nginx/vhosts.rails/bosting.conf' do
   source 'vhost_bosting.conf.erb'
   variables(
-      nginx_conf_base: nginx_conf_base,
+      nginx_conf_base: node['bosting-cp']['nginx_conf_base'],
       panel_domain: node['bosting-cp']['panel_domain'],
       https: node['bosting-cp']['panel_ssl']
   )
