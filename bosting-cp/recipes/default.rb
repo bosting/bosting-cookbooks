@@ -5,6 +5,7 @@
 # Copyright (c) 2016 Alexander Zubkov, All Rights Reserved.
 
 ::Chef::Recipe.send(:include, BostingCp::Helper)
+::Chef::Resource::Template.send(:include, BostingCp::Helper)
 
 include_recipe 'bosting-cp::hostname'
 include_recipe 'bosting-cp::sysctl'
