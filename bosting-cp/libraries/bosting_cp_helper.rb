@@ -23,6 +23,10 @@ module BostingCp
       Digest::SHA1.hexdigest(IO.read('/dev/urandom', 2048))
     end
 
+    def generate_rails_secret
+      SecureRandom.hex(64)
+    end
+
     def symbolize_keys(hash)
       return hash.inject({}){|memo,(k,v)| memo[k.to_sym] =  symbolize_keys(v); memo} if hash.is_a? Hash
       return hash.inject([]){|memo,v    | memo           << symbolize_keys(v); memo} if hash.is_a? Array
