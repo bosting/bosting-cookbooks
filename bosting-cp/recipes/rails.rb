@@ -9,6 +9,27 @@ ruby_env_vars = {
     'HOME' => home # Needed to find .my.cnf in home directory
 }
 
+directory "#{home}/.rails-vars" do
+  owner user
+  group group
+  mode 0700
+end
+
+template "#{home}/.rails-vars/bosting.sh" do
+  source 'rails-vars.sh.erb'
+  variables(
+    lazy {
+      {
+        secret_base: generate_rails_secret,
+        redis_password: ::File.read('/root/redis_password').strip
+      }
+    }
+  )
+  owner user
+  group group
+  mode 0600
+end
+
 template '/usr/local/etc/rc.d/unicorn_bosting' do
   source 'unicorn_bosting_init.erb'
   mode 0750
