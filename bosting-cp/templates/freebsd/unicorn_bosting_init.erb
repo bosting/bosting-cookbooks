@@ -9,7 +9,7 @@
 name=unicorn_bosting
 rcvar=unicorn_bosting_enable
 
-COMMAND="su -l bosting -c 'cd /home/bosting/bosting-cp && PATH=/usr/local/rbenv/shims:$PATH ./bin/unicorn"
+COMMAND="su -l bosting -c 'cd /home/bosting/bosting-cp && source ~/.zshrc && ./bin/unicorn"
 extra_commands="status reload"
 start_cmd="$COMMAND start'"
 stop_cmd="$COMMAND stop'"
