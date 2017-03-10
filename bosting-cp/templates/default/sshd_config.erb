@@ -5,3 +5,5 @@ Port <%= node['bosting-cp']['ssh_port_listen'] %>
 ListenAddress <%= ip %>
 <%- end -%>
 PermitRootLogin <%= node['bosting-cp']['ssh_permit_root_login'] %>
+
+Subsystem       sftp    /usr/libexec/sftp-server
