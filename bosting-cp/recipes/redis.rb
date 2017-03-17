@@ -34,6 +34,12 @@ if node['platform'] == 'debian'
   dest_path = '/etc/redis.conf'
 end
 
+file dest_path do
+  mode 0440
+  owner 'redis'
+  group 'redis'
+end
+
 replace_or_add 'Set Redis password' do
   sensitive true
   path dest_path
