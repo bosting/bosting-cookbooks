@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# PROVIDE: puma_bosting
+# REQUIRE: LOGIN cleanvar mysql redis
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=puma_bosting
+rcvar=puma_bosting_enable
+
+start_cmd="su -l bosting -c 'cd /home/bosting/bosting-cp && source ~/.zshrc && bundle exec puma'"
+
+command="ruby"
+pidfile="/home/bosting/bosting-cp/tmp/pids/puma.pid"
+
+load_rc_config $name
+run_rc_command "$1"

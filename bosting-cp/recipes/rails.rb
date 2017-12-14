@@ -36,12 +36,12 @@ template "#{home}/.rails-vars/bosting.sh" do
   mode 0600
 end
 
-template '/usr/local/etc/rc.d/unicorn_bosting' do
-  source 'unicorn_bosting_init.erb'
+template '/usr/local/etc/rc.d/puma_bosting' do
+  source 'puma_bosting_init.erb'
   mode 0750
 end
 
-service 'unicorn_bosting' do
+service 'puma_bosting' do
   supports(restart: true, reload: true, status: true)
   action :enable
 end
@@ -63,7 +63,7 @@ git 'bosting-cp' do
   group group
   notifies :run, 'rails_command[db_migrate]'
   notifies :run, 'rails_command[assets_precompile]'
-  notifies :reload, 'service[unicorn_bosting]'
+  notifies :reload, 'service[puma_bosting]'
 end
 
 include_recipe 'ruby_build'
@@ -94,7 +94,7 @@ template "#{site_home}/config/settings.yml" do
   source 'settings.yml.erb'
   owner user
   group group
-  notifies :reload, 'service[unicorn_bosting]'
+  notifies :reload, 'service[puma_bosting]'
 end
 
 dest_path = "#{site_home}/config/database.yml"
@@ -145,7 +145,7 @@ template "#{site_home}/config/email.yml" do
   owner user
   group group
   variables(settings: smtp_settings.to_yaml)
-  notifies :reload, 'service[unicorn_bosting]'
+  notifies :reload, 'service[puma_bosting]'
 end
 
 template "#{site_home}/db/seeds.rb" do
@@ -178,7 +178,7 @@ rails_command 'assets_precompile' do
   action :nothing
 end
 
-service 'unicorn_bosting' do
+service 'puma_bosting' do
   action :start
 end
 
