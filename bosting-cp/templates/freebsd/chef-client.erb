@@ -10,9 +10,9 @@ name=chef_client
 rcvar=chef_client_enable
 
 pidfile="/var/run/${name}.pid"
-command="/usr/bin/chef-client"
+command="<%= @command %>"
 command_args="--daemonize --runlist recipe[bosting-generator] --pid ${pidfile}"
-procname="/opt/chef/embedded/bin/ruby"
+procname="<%= @procname %>"
 
 load_rc_config $name
 run_rc_command "$1"

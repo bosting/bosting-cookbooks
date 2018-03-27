@@ -1,5 +1,7 @@
 include_recipe 'jail'
 
+chef_install_method = node['bosting-cp']['chef_install_method']
+
 directory '/etc/ssh/users' do
   mode 0700
 end
@@ -22,7 +24,7 @@ sudo 'notify_chef' do
   user 'bosting'
   runas 'root'
   nopasswd true
-  commands  [dest_path]
+  commands [dest_path]
 end
 
 directory '/var/run/shared' do
@@ -53,7 +55,7 @@ node['bosting-cp']['apache_variations'].each do |jail_name, options|
 
   add_nullfs_to_jail('/usr/home', jail_name)
   link("#{jail_base_path}/home") { to '/usr/home' }
-  add_nullfs_to_jail('/opt/chef', jail_name)
+  add_nullfs_to_jail('/opt/chef', jail_name) if chef_install_method == 'omnitruck'
 
   dest_path = "#{jail_base_path}/usr/ports"
   link(dest_path) do

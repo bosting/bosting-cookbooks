@@ -178,6 +178,14 @@ rails_command 'assets_precompile' do
   action :nothing
 end
 
+%w[sockets pids].each do |dir|
+  directory "#{site_home}/tmp/#{dir}" do
+    recursive true
+    owner user
+    group group
+  end
+end
+
 service 'puma_bosting' do
   action :start
 end

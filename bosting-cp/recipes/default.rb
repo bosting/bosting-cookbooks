@@ -4,8 +4,14 @@
 #
 # Copyright (c) 2016 Alexander Zubkov, All Rights Reserved.
 
+require 'mysql2'
+require 'pg'
+
 ::Chef::Recipe.send(:include, BostingCp::Helper)
 ::Chef::Resource::Template.send(:include, BostingCp::Helper)
+
+install_method = node['bosting-cp']['chef_install_method']
+raise "Unknown Chef install method: #{install_method}" unless %w[omnitruck rubygems].include?(install_method)
 
 include_recipe 'bosting-cp::hostname'
 include_recipe 'bosting-cp::sysctl'

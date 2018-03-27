@@ -1,8 +1,6 @@
 pgsql_version_short = node['bosting-cp']['pgsql_version'].sub('.', '')
 
 if node['platform'] == 'freebsd'
-  package "postgresql#{pgsql_version_short}-server"
-
   append_if_no_line "set PostgreSQL data dir" do
     path '/etc/rc.conf'
     line 'postgresql_data="/var/db/pgsql/data"'
@@ -78,8 +76,4 @@ replace_or_add 'Set md5 authentication method for IPv6 local connections' do
   pattern "host.*all.*all.*::1/128.*trust"
   line "host\tall\tall\t::1/128\tmd5"
   notifies :restart, 'service[postgresql]'
-end
-
-chef_gem 'pg' do
-  compile_time false
 end

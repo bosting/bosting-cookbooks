@@ -1,6 +1,4 @@
 if node['platform'] == 'freebsd'
-  package "mysql#{node['bosting-cp']['mysql_version'].sub('.', '')}-server"
-
   append_if_no_line "set MySQL socket path" do
     path '/etc/rc.conf'
     line 'mysql_args="--socket=/var/run/shared/mysql.sock"'
@@ -14,9 +12,6 @@ if node['platform'] == 'freebsd'
   end
 end
 
-if node['platform'] == 'debian'
-  package 'mysql-server'
-end
 
 execute 'set mysql root password' do
   sensitive true
@@ -41,8 +36,4 @@ template '/root/.my.cnf' do
       user: 'root',
       password: node['bosting-cp']['mysql_root_password']
   )
-end
-
-chef_gem 'mysql2' do
-  compile_time false
 end
