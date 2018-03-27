@@ -4,7 +4,5 @@ cookbook 'bosting-hosting', path: '../bosting-hosting'
 cookbook 'bosting-generator', path: '../bosting-generator'
 cookbook 'freebsd', github: 'sekrett/freebsd'
 cookbook 'jail', github: 'sekrett/jail'
-cookbook 'ruby_rbenv', github: 'sekrett/ruby_rbenv'
-cookbook 'ruby_build', github: 'sekrett/chef-ruby_build'
 
 metadata
