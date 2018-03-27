@@ -33,13 +33,6 @@ if node['platform'] == 'freebsd'
     notifies :reload, 'service[apache24]'
   end
 
-  replace_or_add 'enable mod_rpaf' do
-    path httpd_conf
-    pattern "^#LoadModule rpaf_module        libexec/apache24/mod_rpaf.so"
-    line "LoadModule rpaf_module        libexec/apache24/mod_rpaf.so"
-    notifies :reload, 'service[apache24]'
-  end
-
   template "#{httpd_path}/Includes/sites.conf" do
     source 'apache-sites.conf.erb'
     variables(www_path: '/usr/local/www')
