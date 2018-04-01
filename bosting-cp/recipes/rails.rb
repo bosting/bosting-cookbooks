@@ -63,7 +63,7 @@ git 'bosting-cp' do
   group group
   notifies :run, 'rails_command[db_migrate]'
   notifies :run, 'rails_command[assets_precompile]'
-  notifies :reload, 'service[puma_bosting]'
+  notifies :restart, 'service[puma_bosting]'
 end
 
 include_recipe 'ruby_build'
@@ -94,7 +94,7 @@ template "#{site_home}/config/settings.yml" do
   source 'settings.yml.erb'
   owner user
   group group
-  notifies :reload, 'service[puma_bosting]'
+  notifies :restart, 'service[puma_bosting]'
 end
 
 dest_path = "#{site_home}/config/database.yml"
@@ -145,7 +145,7 @@ template "#{site_home}/config/email.yml" do
   owner user
   group group
   variables(settings: smtp_settings.to_yaml)
-  notifies :reload, 'service[puma_bosting]'
+  notifies :restart, 'service[puma_bosting]'
 end
 
 template "#{site_home}/db/seeds.rb" do
