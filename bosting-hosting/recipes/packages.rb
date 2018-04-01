@@ -56,7 +56,7 @@ if node['platform'] == 'freebsd'
 
   package "php#{php_version_short}"
 
-  php_extensions = %w(
+  php_extensions = %w[
     bcmath
     bz2
     ctype
@@ -73,7 +73,6 @@ if node['platform'] == 'freebsd'
     imap
     json
     mbstring
-    mcrypt
     mysqli
     opcache
     openssl
@@ -96,16 +95,21 @@ if node['platform'] == 'freebsd'
     xsl
     zip
     zlib
-  )
+  ]
   if php5
-    php_extensions.concat(%w(
+    php_extensions.concat(%w[
       mysql
-    ))
+    ])
   end
   if php7
-    php_extensions.concat(%w(
+    php_extensions.concat(%w[
       intl
-    ))
+    ])
+  end
+  if php_version_short.to_i < 72
+    php_extensions.concat(%w[
+      mcrypt
+    ])
   end
 
   php_extensions.each do |php_extension|
@@ -120,16 +124,21 @@ if node['platform'] == 'freebsd'
   package 'icu'
   package 're2c'
 
-  pecl_extensions = %w(
+  pecl_extensions = %w[
     timezonedb
-  )
+  ]
   if php5
-    pecl_extensions.concat(%w(
+    pecl_extensions.concat(%w[
       intl
       mongo
       pdflib
       rar
-    ))
+    ])
+  end
+  if php_version_short.to_i >= 72
+    pecl_extensions.concat(%w[
+      mcrypt
+    ])
   end
 
   pecl_extensions.each do |pecl_extensions|
