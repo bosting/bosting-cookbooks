@@ -31,12 +31,14 @@ if node['platform'] == 'freebsd'
 
   apache_version = node['bosting-hosting']['apache_version']
   apache_version_short = node['bosting-hosting']['apache_version_short']
-  raise Chef::Exceptions::Package, "Not supported apache version: #{apache_version}(#{apache_version_short})" unless %w(22 24).include?(apache_version_short)
+  supported_apache_versions = %w[22 24]
+  raise Chef::Exceptions::Package, "Not supported apache version: #{apache_version}(#{apache_version_short})" unless supported_apache_versions.include?(apache_version_short)
   package "apache#{apache_version_short}"
 
   php_version = node['bosting-hosting']['php_version']
   php_version_short = node['bosting-hosting']['php_version_short']
-  raise Chef::Exceptions::Package, "Not supported php version: #{php_version}" unless %w(55 56 70).include?(php_version_short)
+  supported_php_versions = %w[55 56 70 71 72]
+  raise Chef::Exceptions::Package, "Not supported php version: #{php_version}" unless supported_php_versions.include?(php_version_short)
   php5 = php_version.match(/^5/)
   php7 = php_version.match(/^7/)
 
