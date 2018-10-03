@@ -66,6 +66,10 @@ git 'bosting-cp' do
   notifies :restart, 'service[puma_bosting]'
 end
 
+# TODO: remove this when a new ruby_build cookbook is released
+node.default['ruby_build']['install_pkgs_cruby'] =
+  %w[autoconf autoconf-wrapper automake indexinfo libedit libffi libyaml m4 perl5 gmake]
+
 include_recipe 'ruby_build'
 include_recipe 'ruby_rbenv::system'
 
