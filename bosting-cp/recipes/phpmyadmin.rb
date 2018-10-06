@@ -1,5 +1,12 @@
-package 'phpmyadmin' do
-  notifies :reload, 'service[apache24]'
+case node['platform']
+when 'freebsd'
+  package 'phpMyAdmin-php56' do
+    notifies :reload, 'service[apache24]'
+  end
+when 'debian'
+  package 'phpMyAdmin' do
+    notifies :reload, 'service[apache]'
+  end
 end
 
 dest_path = '/usr/local/www/phpMyAdmin/config.inc.php'
