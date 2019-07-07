@@ -10,6 +10,7 @@ property :min_spare_servers, Fixnum
 property :max_spare_servers, Fixnum
 property :max_clients, Fixnum
 property :apache_version, String
+property :custom_config, String
 
 action_class do
   include BostingGenerator::Helper
@@ -30,6 +31,7 @@ action :create do
         max_spare_servers: max_spare_servers,
         max_clients: max_clients,
         apache_version: apache_version,
+        custom_config: custom_config,
         include_directive: apache_version == '24' ? 'IncludeOptional' : 'Include'
     )
   end

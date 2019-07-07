@@ -10,6 +10,7 @@ property :directory_index, String
 property :show_indexes, [TrueClass, FalseClass]
 property :apache_version, String
 property :php_version, String
+property :custom_config, String
 
 action :create do
   directory "/home/#{user}/#{server_name}" do
@@ -37,7 +38,8 @@ action :create do
         port: port,
         directory_index: directory_index,
         show_indexes: show_indexes ? 'Indexes' : '',
-        php_version: php_version
+        php_version: php_version,
+        custom_config: custom_config
     )
   end
 

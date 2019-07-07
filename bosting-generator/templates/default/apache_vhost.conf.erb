@@ -36,5 +36,6 @@
 		php_admin_value session.save_path /usr/home/<%= @user %>/<%= @server_name %>/tmp
 		php_admin_value soap.wsdl_cache_dir /usr/home/<%= @user %>/<%= @server_name %>/tmp
 	</IfModule>
+	<%= @custom_config -%>
 </VirtualHost>
 
