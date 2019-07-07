@@ -1,6 +1,6 @@
 case node['bosting-cp']['chef_install_method']
 when 'omnitruck'
-  command  = '/usrbin/chef-client'
+  command  = '/usr/bin/chef-client'
   procname = '/opt/chef/embedded/bin/ruby'
 when 'rubygems'
   command  = '/usr/local/bin/chef-client'
