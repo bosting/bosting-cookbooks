@@ -49,6 +49,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
         min_spare_servers task['min_spare_servers']
         max_spare_servers task['max_spare_servers']
         max_clients task['max_clients']
+        custom_config task['custom_config']
         action task['action']
       end
     end
@@ -74,6 +75,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
         apache_version task['apache_version']
         php_version task['php_version']
         show_indexes task['show_indexes']
+        custom_config task['custom_config']
         action task['action']
       end
     end
