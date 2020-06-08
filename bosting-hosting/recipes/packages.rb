@@ -68,7 +68,6 @@ if node['platform'] == 'freebsd'
     ftp
     gd
     gettext
-    hash
     iconv
     imap
     json
@@ -111,6 +110,12 @@ if node['platform'] == 'freebsd'
       mcrypt
     ])
   end
+  if php_version_short.to_i < 74
+    php_extensions.concat(%w[
+      hash
+    ])
+  end
+
 
   php_extensions.each do |php_extension|
     package("php#{php_version_short}-#{php_extension}")
