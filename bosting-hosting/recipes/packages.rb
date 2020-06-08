@@ -37,7 +37,7 @@ if node['platform'] == 'freebsd'
 
   php_version = node['bosting-hosting']['php_version']
   php_version_short = node['bosting-hosting']['php_version_short']
-  supported_php_versions = %w[55 56 70 71 72]
+  supported_php_versions = %w[55 56 70 71 72 73 74]
   raise Chef::Exceptions::Package, "Not supported php version: #{php_version}" unless supported_php_versions.include?(php_version_short)
   php5 = php_version.match(/^5/)
   php7 = php_version.match(/^7/)
