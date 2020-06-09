@@ -85,7 +85,7 @@ end
 
 rails_command 'bundle install' do
   command 'bundle install --without development test --deployment'
-  not_if 'bundle check', cwd: site_home
+  only_if 'bundle check', cwd: site_home
 end
 
 template "#{home}/.zshrc" do
