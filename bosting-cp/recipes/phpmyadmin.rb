@@ -1,6 +1,6 @@
 case node['platform']
 when 'freebsd'
-  package 'phpMyAdmin-php56' do
+  package 'phpMyAdmin-php74' do
     notifies :reload, 'service[apache24]'
   end
 when 'debian'

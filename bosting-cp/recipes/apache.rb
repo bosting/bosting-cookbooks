@@ -1,7 +1,7 @@
 if node['platform'] == 'freebsd'
   package 'apache24'
-  package 'php56'
-  package 'mod_php56'
+  package 'php74'
+  package 'mod_php74'
   package 'ap24-mod_rpaf2'
 
   service 'apache24' do
