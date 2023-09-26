@@ -7,6 +7,7 @@ property :external_ip, String
 property :port, Fixnum
 property :apache_variation, String
 property :server_aliases, Array
+property :skip_nginx, [TrueClass, FalseClass]
 
 action_class do
   include BostingGenerator::Helper
@@ -22,6 +23,7 @@ action :create do
         port: port
     )
     mode 0600
+    not_if { skip_nginx }
   end
 
   nginx user do

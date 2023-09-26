@@ -62,6 +62,7 @@ while (task = $redis.rpop("tasks_for_#{node['bosting-generator']['queuename']}")
         port task['port']
         apache_variation task['apache_variation']
         server_aliases task['server_aliases']
+        skip_nginx task['skip_nginx']
         action task['action']
       end
     else
